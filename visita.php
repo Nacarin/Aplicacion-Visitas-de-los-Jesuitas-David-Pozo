@@ -37,5 +37,33 @@
                 return false; // Error al borrar la Visita
             }
         }
+
+        public function listarVisitas()
+        {
+            // Define la consulta SQL para seleccionar registros de la tabla 'visita'
+            $query = "SELECT idVisita, idJesuita, fechaHora FROM visita";
+        
+            // Ejecuta la consulta SQL y almacena el resultado en la variable $result
+            $result = $this->db->query($query);
+        
+            if ($result && $result->num_rows > 0) {
+                // Si la consulta se ejecuta con éxito y hay resultados,
+                // inicializa un array llamado $visitas para almacenar los datos de las visitas
+                $visitas = [];
+        
+                // Itera a través de los registros obtenidos del resultado
+                while ($row = $result->fetch_assoc()) {
+                    // Para cada registro, agrega la información a un elemento del array $visitas
+                    $visitas[] = $row;
+                }
+        
+                // Retorna el array $visitas que contiene los datos de las visitas
+                return $visitas;
+            } else {
+                // Si no hay resultados (ninguna visita), retorna un array vacío
+                return [];
+            }
+        }
+             
     }
 ?>

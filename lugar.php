@@ -49,5 +49,34 @@
                 return false; // Error al borrar el Lugar
             }
         }
+
+        public function listarLugares()
+        {
+            // Define la consulta SQL para seleccionar todos los campos de la tabla 'lugar'
+            $query = "SELECT ip, lugar, descripcion FROM lugar";
+            
+            // Ejecuta la consulta SQL y almacena el resultado en la variable $result
+            $result = $this->db->query($query);
+        
+            if ($result && $result->num_rows > 0) {
+                // Si la consulta se ejecuta con éxito y devuelve una o más filas de datos
+                
+                // Crea un array vacío llamado $lugares para almacenar los datos de los lugares
+                $lugares = [];
+                
+                // Itera a través de las filas de datos obtenidas
+                while ($row = $result->fetch_assoc()) {
+                    // Agrega cada fila como un elemento al array $lugares
+                    $lugares[] = $row;
+                }
+                
+                // Retorna el array $lugares que contiene la lista de lugares
+                return $lugares;
+            } else {
+                // Si la consulta no devuelve resultados, se retorna un array vacío
+                return [];
+            }
+        }
+               
     }
 ?>

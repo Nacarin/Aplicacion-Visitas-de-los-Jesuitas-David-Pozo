@@ -56,5 +56,30 @@
                 return false; // Error al borrar el Jesuita
             }
         }
+
+        public function listarJesuitas()
+        {
+            // Construye una consulta SQL para seleccionar los campos idJesuita, nombre y firma de la tabla "jesuita"
+            $query = "SELECT idJesuita, nombre, firma FROM jesuita";
+            
+            // Ejecuta la consulta SQL en la base de datos
+            $result = $this->db->query($query);
+        
+            if ($result && $result->num_rows > 0) {
+                // Si la consulta se ejecutó con éxito y hay al menos una fila de resultado
+                
+                $jesuitas = []; // Inicializa un array vacío para almacenar los datos de los jesuitas
+        
+                // Itera a través de las filas de resultado
+                while ($row = $result->fetch_assoc()) {
+                    $jesuitas[] = $row; // Agrega los datos de cada jesuita al array de jesuitas
+                }
+        
+                return $jesuitas; // Retorna un array de jesuitas
+            } else {
+                return []; // Retorna un array vacío si no hay jesuitas en la base de datos
+            }
+        }
+        
     }
 ?>

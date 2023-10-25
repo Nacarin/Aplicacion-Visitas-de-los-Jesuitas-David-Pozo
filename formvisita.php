@@ -1,7 +1,7 @@
 <?php
     // Incluye el archivo de configuración de la base de datos y la clase Visita
     require_once('config.php');
-    require_once('Visita.php');
+    require_once('visita.php');
 
     // Inicializa la conexión a la base de datos
     $db = new mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -35,6 +35,7 @@
             echo "Error al borrar la Visita.";
         }
     }
+    
 
 ?>
 
@@ -59,6 +60,10 @@
             <label>ID Visita:</label>
             <input type="text" name="idVisita" required>
             <input type="submit" name="borrarVisita" value="Borrar Visita">
+        </form>
+        <h2>Listar Visitas</h2>
+        <form method="get" action="listarvisita.php">
+            <input type="submit" name="listarVisita" value="Listar Visita">
         </form>
         <h2>Volver al Índice</h2>
         <a href="index.html">Inicio</a>

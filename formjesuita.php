@@ -12,6 +12,8 @@
 
     $jesuita = new Jesuita($db);
 
+    $jesuitasList = $jesuita->listarJesuitas();
+
     // Procesar la solicitud para agregar un jesuita
     if (isset($_GET['agregarJesuita'])) {
         $idJesuita = $_GET['idJesuita'];
@@ -49,13 +51,14 @@
         }
     }
 
+
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>CRUD de Jesuitas</title>
-    <link rel="stylesheet" type="text/css" href="estilos.css">
-</head>
+    <head>
+        <title>CRUD de Jesuitas</title>
+        <link rel="stylesheet" type="text/css" href="estilos.css">
+    </head>
     <body>
         <h1>CRUD de Jesuitas</h1>     
         <h2>Agregar Jesuita</h2>
@@ -83,6 +86,10 @@
             <label>ID Jesuita:</label>
             <input type="text" name="idJesuita" required>
             <input type="submit" name="borrarJesuita" value="Borrar Jesuita">
+        </form>
+        <h2>Listar Jesuitas</h2>
+        <form method="get" action="listarjesuita.php">
+            <input type="submit" name="listarJesuitas" value="Listar Jesuitas">
         </form>
         <h2>Volver al Índice</h2>
         <a href="index.html">Inicio</a>
