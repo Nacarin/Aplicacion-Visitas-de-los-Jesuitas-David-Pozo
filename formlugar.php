@@ -56,7 +56,7 @@
 <html>
     <head>
         <title>CRUD de Lugares</title>
-        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link rel="stylesheet" type="text/css" href="./estilos/estilos.css">
     </head>
     <body>
         <h1>CRUD de Lugares</h1>      

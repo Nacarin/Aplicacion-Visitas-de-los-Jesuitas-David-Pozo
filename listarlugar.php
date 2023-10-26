@@ -39,7 +39,7 @@
 <html>
     <head>
         <title>Listado</title>
-        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link rel="stylesheet" type="text/css" href="./estilos/estilos.css">
     </head>
     <body>
         <form></form>
