@@ -77,6 +77,35 @@
                 return [];
             }
         }
+
+        //Si vamos a borrar un Lugar primero miraremos  si tiene visitas asociadas
+        public function contarVisitasPorLugar($idLugar) {
+            $query = "SELECT COUNT(*) as total_visitas FROM visita WHERE idLugar = $idLugar";
+    
+            $result = $this->db->query($query);
+            if ($result) {
+                $row = $result->fetch_assoc();
+                return $row['total_visitas'];
+            } else {
+                return 0;
+            }
+        }
+
+        public function buscarLugarPorIP($ip)
+        {
+            // Consulta SQL para buscar un lugar por su IP
+            $query = "SELECT ip, lugar, descripcion FROM lugar WHERE ip = '$ip'";
+            
+            // Ejecutar la consulta y obtener el resultado
+            $result = $this->db->query($query);
+    
+            if ($result && $result->num_rows > 0) {
+                return $result->fetch_assoc(); // Retorna los datos del lugar
+            } else {
+                return null; // Si no se encuentra el lugar, se devuelve null
+            }
+        }
+
                
     }
 ?>

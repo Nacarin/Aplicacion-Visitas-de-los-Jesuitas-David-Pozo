@@ -27,28 +27,40 @@
         }
     }
 
-    // Procesar la solicitud para modificar un jesuita
-    if (isset($_GET['modificarJesuita'])) {
-        $idJesuita = $_GET['idJesuita'];
-        $nombre = $_GET['nombre'];
-        $firma = $_GET['firma'];
-
-        if ($jesuita->modificarJesuita($idJesuita, $nombre, $firma)) {
-            echo "Jesuita modificado con éxito.";
+    //Buscar jesuita
+    if (isset($_GET['buscarJesuita'])) {
+        $idJesuitaBuscar = $_GET['idJesuitaBuscar'];
+        $jesuitaEncontrado = $jesuita->buscarJesuitaPorID($idJesuitaBuscar);
+    
+        // Agregar un enlace para modificar el Jesuita encontrado
+        if ($jesuitaEncontrado) {
+            echo '<h2>Resultado de la búsqueda</h2>';
+            echo '<p>Nombre: ' . $jesuitaEncontrado['nombre'] . '</p>';
+            echo '<p>Firma: ' . $jesuitaEncontrado['firma'] . '</p>';
+            // Agregar enlace a la página de modificación
+            echo '<a href="modificarjesuita.php?idJesuitaModificar=' . $idJesuitaBuscar . '">Modificar Jesuita</a>';
         } else {
-            echo "Error al modificar el Jesuita.";
+            echo 'No se encontró un Jesuita con el ID proporcionado.';
         }
+
     }
 
-    // Procesar la solicitud para borrar un jesuita
-    if (isset($_GET['borrarJesuita'])) {
-        $idJesuita = $_GET['idJesuita'];
-
-        if ($jesuita->borrarJesuita($idJesuita)) {
-            echo "Jesuita borrado con éxito.";
+    //Buscar para borrarlo jesuita
+    if (isset($_GET['buscarJesuita'])) {
+        $idJesuitaBuscar = $_GET['idJesuitaBuscar'];
+        $jesuitaEncontrado = $jesuita->buscarJesuitaPorID($idJesuitaBuscar);
+    
+        // Agregar un enlace para borrar el Jesuita encontrado
+        if ($jesuitaEncontrado) {
+            echo '<h2>Resultado de la búsqueda</h2>';
+            echo '<p>Nombre: ' . $jesuitaEncontrado['nombre'] . '</p>';
+            echo '<p>Firma: ' . $jesuitaEncontrado['firma'] . '</p>';
+            // Agregar enlace a la página de modificación
+            echo '<a href="borrarjesuita.php?idJesuitaBorrar=' . $idJesuitaBuscar . '">Borrar Jesuita</a>';
         } else {
-            echo "Error al borrar el Jesuita.";
+            echo 'No se encontró un Jesuita con el ID proporcionado.';
         }
+
     }
 
 
@@ -71,21 +83,17 @@
             <input type="text" name="firma" required>
             <input type="submit" name="agregarJesuita" value="Agregar Jesuita">
         </form>       
-        <h2>Modificar Jesuita</h2>
-        <form method="get">
+        <h2>Buscar Jesuita por ID</h2>
+        <form method="get" action="modificarjesuita.php">
+            <label>ID Jesuita:</label>
+            <input type="text" name="idJesuitaBuscar" required>
+            <input type="submit" name="buscarJesuita" value="Buscar Jesuita">
+        </form>     
+        <h2>Borrar Jesuita por ID</h2>
+        <form method="get" action="borrarjesuita.php">
             <label>Puesto del Jesuita:</label>
             <input type="text" name="idJesuita" required>
-            <label>Nuevo Nombre:</label>
-            <input type="text" name="nombre" required>
-            <label>Nueva Firma:</label>
-            <input type="text" name="firma" required>
-            <input type="submit" name="modificarJesuita" value="Modificar Jesuita">
-        </form>       
-        <h2>Borrar Jesuita</h2>
-        <form method="get">
-            <label>Puesto del Jesuita:</label>
-            <input type="text" name="idJesuita" required>
-            <input type="submit" name="borrarJesuita" value="Borrar Jesuita">
+            <input type="submit" name="borrarJesuita" value="Buscar y Borrar Jesuita">
         </form>
         <h2>Volver al Índice</h2>
         <a href="../index.html">Inicio</a>

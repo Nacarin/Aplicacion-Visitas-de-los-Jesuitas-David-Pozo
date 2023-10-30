@@ -26,27 +26,20 @@
         }
     }
 
-    // Procesar la solicitud para modificar un lugar
-    if (isset($_GET['modificarLugar'])) {
+    // Procesar la solicitud para buscar un lugar por IP
+    if (isset($_GET['buscarLugar'])) {
         $ip = $_GET['ip'];
-        $lugarNombre = $_GET['lugar'];
-        $descripcion = $_GET['descripcion'];
-
-        if ($lugar->modificarLugar($ip, $lugarNombre, $descripcion)) {
-            echo "Lugar modificado con éxito.";
+        $lugarEncontrado = $lugar->buscarLugarPorIP($ip);
+    
+        if ($lugarEncontrado) {
+            echo '<h2>Resultado de la búsqueda</h2>';
+            echo '<p>IP: ' . $lugarEncontrado['ip'] . '</p>';
+            echo '<p>Nombre del Lugar: ' . $lugarEncontrado['nombre'] . '</p>';
+            echo '<p>Descripción: ' . $lugarEncontrado['descripcion'] . '</p>';
+            echo '<a href="modificarlugar.php?ipModificar=' . $ip . '">Modificar Lugar</a>';
+            echo '<a href="borrarlugar.php?ipBorrar=' . $ip . '">Borrar Lugar</a>';
         } else {
-            echo "Error al modificar el Lugar.";
-        }
-    }
-
-    // Procesar la solicitud para borrar un lugar
-    if (isset($_GET['borrarLugar'])) {
-        $ip = $_GET['ip'];
-
-        if ($lugar->borrarLugar($ip)) {
-            echo "Lugar borrado con éxito.";
-        } else {
-            echo "Error al borrar el Lugar.";
+            echo 'No se encontró un Lugar con la IP proporcionada.';
         }
     }
     
@@ -71,22 +64,20 @@
             <input type="text" name="descripcion">
             <input type="submit" name="agregarLugar" value="Agregar Lugar">
         </form>      
-        <h2>Modificar Lugar</h2>
+<!--        <h2>Buscar Lugar por IP</h2>
         <form method="get">
             <label>IP:</label>
             <input type="text" name="ip" required>
-            <label>Nuevo Nombre del Lugar:</label>
-            <input type="text" name="lugar" required>
-            <label>Nueva Descripción:</label>
-            <input type="text" name="descripcion">
-            <input type="submit" name="modificarLugar" value="Modificar Lugar">
-        </form>       
-        <h2>Borrar Lugar</h2>
-        <form method="get">
-            <label>IP:</label>
-            <input type="text" name="ip" required>
-            <input type="submit" name="borrarLugar" value="Borrar Lugar">
+            <input type="submit" name="buscarLugar" value="Buscar Lugar">
         </form>
+-->        
+        <h2>Buscar Lugar por IP y borrarlo</h2>
+        <form method="get" action="borrarlugar.php">
+            <label>IP:</label>
+            <input type="text" name="ip" required>
+            <input type="submit" name="borrarLugar" value="Buscar y Borrar Lugar">
+        </form>
+
         <h2>Listar Lugares</h2>
         <form method="get" action="listarlugar.php">
             <input type="submit" name="listarLugares" value="Listar Lugares">

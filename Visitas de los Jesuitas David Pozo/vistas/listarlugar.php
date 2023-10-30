@@ -45,7 +45,7 @@
     <body>
         <form></form>
             <h2>Volver al Índice</h2>
-            <a href="../index.html">Inicio</a>
+            <a href="./formlugar.php">Lugares</a>
         </form>
     </body>
 </html>
